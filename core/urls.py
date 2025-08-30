@@ -10,12 +10,12 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='vc.ru API',
+        title='core API',
         default_version='v1',
         description='description',
         terms_of_service="terms",
         contact=openapi.Contact(email="mukhibillo@gmail.com"),
-        license=openapi.License(name="VC.RU License"),
+        license=openapi.License(name="COR.License"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),

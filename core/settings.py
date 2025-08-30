@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'querycount.middleware.QueryCountMiddleware',
 ]
 
-ROOT_URLCONF = 'vc_ru.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vc_ru.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]

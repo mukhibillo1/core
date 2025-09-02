@@ -12,6 +12,36 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+import dotenv
+
+# BASE_DIR
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# django.env faylni yuklash
+dotenv.load_dotenv(os.path.join(BASE_DIR, "django.env"))
+
+# SECRET_KEY va DEBUG
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+# ALLOWED_HOSTS
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+
+# Debug Toolbar uchun
+INTERNAL_IPS = os.getenv("INTERNAL_IPS", "127.0.0.1").split(",")
+
+# Database sozlamalari
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
+        'NAME': os.getenv("DB_NAME", "vc.ru"),
+        'USER': os.getenv("DB_USER", "postgres"),
+        'PASSWORD': os.getenv("DB_PASSWORD", "mukhibillo"),
+        'HOST': os.getenv("DB_HOST", "localhost"),
+        'PORT': os.getenv("DB_PORT", "5432"),
+        'ATOMIC_REQUESTS': True,
+    }
+}
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,12 +114,12 @@ INTERNAL_IPS = [
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
+
+try:
+    from .local_settings import *
+except:
+    print("Create local_settings.py")
 
 
 # Password validation
